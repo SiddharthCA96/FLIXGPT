@@ -1,8 +1,10 @@
 # FlixGPT
 
-- npm create vite@latest
-- configure tailwind
-
+- Create vite@latest
+- Configure tailwind
+- Header Build
+- Start building login form
+- SignUp form 
 
 
 
