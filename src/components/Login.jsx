@@ -1,9 +1,25 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Header from "./Header";
-
+import validate from "../utils/validate";
 const Login = () => {
+    //state var to change/switch btw the forms
   const [isSignInform, setIsSignInForm] = useState(true);
-
+  const [errorMessage,setErrorMessage]= useState(null);
+  const name=useRef(null);
+  const email=useRef(null);
+  const password=useRef(null);
+  //handle button
+  const handleButton=()=>{
+    //validate the data using the function create din valiadate.jsx
+    //valiadate takes email and pass as props
+    console.log(email.current.value);
+    console.log(password.current.value);
+    
+    const mssg=validate(email.current.value,password.current.value,name.current.value);
+    setErrorMessage(mssg);
+    console.log(mssg);
+  }
+  //toggle form function
   const toggleSignInForm = () => {
     setIsSignInForm(!isSignInform);
   };
@@ -21,28 +37,32 @@ const Login = () => {
         />
       </div>
       <div className="bg-black/15 absolute inset-0 flex items-center justify-center">
-        <form className="bg-black/75 p-7  rounded shadow-md w-1/4">
+        <form onSubmit={(e)=>e.preventDefault()} className="bg-black/75 p-7  rounded shadow-md w-1/4">
           <h1 className="font-bold text-3xl mb-3 text-white">
             {isSignInform ? "Sign In" : "Sign Up"}
           </h1>
           {!isSignInform && (
             <input
+              ref={name}
               type="text"
               placeholder="Full Name"
-              className="p-3 my-3 border rounded w-full bg-black/10"
+              className="p-3 my-3 border rounded w-full bg-black/10 text-white"
             />
           )}
           <input
+            ref={email}
             type="text"
             placeholder="Email Address"
-            className="p-3 my-3 border rounded w-full bg-black/10"
+            className="p-3 my-3 border rounded w-full bg-black/10 text-white"
           />
           <input
+            ref={password}
             type="password"
             placeholder="Password"
-            className="p-3 my-3 border rounded w-full bg-black/10"
+            className="p-3 my-3 border rounded w-full bg-black/10 text-white"
           />
-          <button className="p-3 my-3 bg-red-500 text-white rounded w-full">
+          <p className="text-red-500 p-1">{errorMessage}</p>
+          <button className="p-3 my-3 bg-red-500 text-white rounded w-full" onClick={handleButton}>
             {isSignInform ? "Sign In" : "Sign Up"}
           </button>
           <p className="text-white w-full text-center mt-4">OR</p>
@@ -63,5 +83,4 @@ const Login = () => {
     </>
   );
 };
-
 export default Login;
