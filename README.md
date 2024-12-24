@@ -15,6 +15,10 @@
   - Be between 8 and 32 characters long.
 - Firebase Setup
 - Authentication
+- Save the user data(user object) in redux store as we may need it in future
+  - Create appstore and userslice inside utils
+  - provide store to app
+- After signUp/signin we have to send the user to browse page
 
 
 
