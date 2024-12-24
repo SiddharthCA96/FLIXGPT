@@ -1,6 +1,8 @@
 import { useRef, useState } from "react";
 import Header from "./Header";
 import validate from "../utils/validate";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword} from "firebase/auth";
+import { auth } from "../utils/firebase";
 const Login = () => {
     //state var to change/switch btw the forms
   const [isSignInform, setIsSignInForm] = useState(true);
@@ -12,12 +14,43 @@ const Login = () => {
   const handleButton=()=>{
     //validate the data using the function create din valiadate.jsx
     //valiadate takes email and pass as props
-    console.log(email.current.value);
-    console.log(password.current.value);
+    // console.log(email.current.value);
+    // console.log(password.current.value);
     
-    const mssg=validate(email.current.value,password.current.value,name.current.value);
+    const mssg=validate(email.current.value,password.current.value);
     setErrorMessage(mssg);
-    console.log(mssg);
+    //console.log(mssg);
+    if(mssg)return;
+
+    if(!isSignInform){
+      //Sign up logic
+        //Sign up user after creating the user with email
+        createUserWithEmailAndPassword(auth, email.current.value,password.current.value)
+        .then((userCredential) => {
+          // Signed up 
+          const user = userCredential.user;
+          console.log(user);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorMessage + "-" + errorCode);
+        });
+    }
+    else{
+    //sign in logic
+      signInWithEmailAndPassword(auth, email.current.value,password.current.value)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        console.log(user);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        setErrorMessage(errorMessage + "-" + errorCode);
+      });
+    }
   }
   //toggle form function
   const toggleSignInForm = () => {

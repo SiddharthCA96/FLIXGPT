@@ -7,6 +7,14 @@
 - Start building login form
 - SignUp form
 - Form Validation(using regex) 
+- Password Regex
+  - /^(?=.*?[0-9])(?=.*?[A-Za-z]).{8,32}$/ 
+  - The password must:
+  - Contain at least one digit.
+  - Contain at least one letter.
+  - Be between 8 and 32 characters long.
+- Firebase Setup
+- Authentication
 
 
 
