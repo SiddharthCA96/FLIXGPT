@@ -18,6 +18,7 @@
 - Save the user data(user object) in redux store as we may need it in future
   - Create appstore and userslice inside utils
   - provide store to app
+- Give the infoof user send the data to slice
 - After signUp/signin we have to send the user to browse page
 
 
