@@ -20,6 +20,10 @@
   - provide store to app
 - Give the infoof user send the data to slice
 - After signUp/signin we have to send the user to browse page
+- Browse page
+ - Header
+  - Sign Out button
+  - User logo
 
 
 

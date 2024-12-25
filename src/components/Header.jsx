@@ -1,6 +1,20 @@
 import React from 'react';
-
+import { auth } from '../utils/firebase';
+import { signOut } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 const Header = () => {
+  const navigate=useNavigate();
+
+  //handle the sign out function
+  const handleSignOut=()=>{
+    signOut(auth).then(() => {
+      // Sign-out successful so navigate to the login page 
+      navigate("/");
+    }).catch((error) => {
+      // An error happened so print the errror or navigate to error page
+      navigate("/error");
+    });
+  }
   return (
     <>
       <div className=" fixed top-0 left-0 flex justify-between  w-screen h-20  bg-gradient-to-b from-black">
@@ -16,7 +30,7 @@ const Header = () => {
           src="https://occ-0-6245-2164.1.nflxso.net/dnm/api/v6/vN7bi_My87NPKvsBoib006Llxzg/AAAABXvDtFo-HM-uWfPvUId_3crt7farmbN51NbaGZfil_-kRLGtiSnYeL_FNI7caMItKf77i55RP0m8Ofb1bQGDuv1qRkQC2Bg.png?r=9fc"
           alt="secondary logo"
         />
-        <button className="p-2 my-5 w-20 h-10 mr-4 hover:bg-red-800 bg-red-600 rounded-full border-10 text-white">Sign Out</button>
+        <button onClick={handleSignOut} className="p-2 my-5 w-20 h-10 mr-4 hover:bg-red-800 bg-red-600 rounded-full border-10 text-white">Sign Out</button>
       </div>
     </>
   );
