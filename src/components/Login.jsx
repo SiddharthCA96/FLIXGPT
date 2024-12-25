@@ -41,16 +41,14 @@ const Login = () => {
             const user = userCredential.user;
             console.log(name.current.value);
             updateProfile(user, {
-               
               displayName: name.current.value, photoURL: "https://occ-0-6245-2164.1.nflxso.net/dnm/api/v6/vN7bi_My87NPKvsBoib006Llxzg/AAAABXvDtFo-HM-uWfPvUId_3crt7farmbN51NbaGZfil_-kRLGtiSnYeL_FNI7caMItKf77i55RP0m8Ofb1bQGDuv1qRkQC2Bg.png?r=9f"
 
             }).then(() => {
               // Profile updated!
               //now get the name and user profile from the updated auth
-
               const {uid,email,displayName,photoURL}=auth.currentUser;
                dispatch(addUser({uid:uid,email:email,displayName:displayName,photoURL:photoURL}));
-               
+
               //navigate the user to browse
               navigate("/browse");
             }).catch((error) => {

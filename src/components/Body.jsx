@@ -9,7 +9,6 @@ import { auth } from '../utils/firebase'
 import { onAuthStateChanged } from 'firebase/auth'
 const Body = () => {
     //hooks will always be on top of the component
-    const dispatch=useDispatch();
     //alll the routings
     const appRouter=createBrowserRouter([
         {
@@ -23,21 +22,7 @@ const Body = () => {
     ]);
 
     //sending the data to our store using useeffect hook
-    useEffect(()=>{
-        //using useeffect hook as i want to this work only once not at every rendering
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-              // User is signed in, see docs for a list of available properties
-              const {uid,email,displayName,photoURL} = user;
-              //dispatch an action using dispatch(add user to db)
-              dispatch(addUser({uid:uid,email:email,displayName:displayName,photoURL:photoURL}));
-            } else {
-              // User is signed out
-              //dispatch an action remove user
-              dispatch(removeUser());
-            }
-          });
-    },[auth]);
+
   return (
     <div>
         <RouterProvider router={appRouter}></RouterProvider>
