@@ -1,18 +1,25 @@
 import { useRef, useState } from "react";
 import Header from "./Header";
 import validate from "../utils/validate";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword} from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
+
+
+
 const Login = () => {
-    //state var to change/switch btw the forms
+  //state var to change/switch btw the forms
   const [isSignInform, setIsSignInForm] = useState(true);
   const [errorMessage,setErrorMessage]= useState(null);
   const navigate=useNavigate()
-
+  const dispatch=useDispatch();
   const name=useRef(null);
   const email=useRef(null);
   const password=useRef(null);
+
+
   //handle button
   const handleButton=()=>{
     //validate the data using the function create din valiadate.jsx
@@ -31,11 +38,27 @@ const Login = () => {
         createUserWithEmailAndPassword(auth, email.current.value,password.current.value)
         .then((userCredential) => {
           // Signed up 
-          const user = userCredential.user;
-         // console.log(user);
-          //navigate the user to browse
-          navigate("/browse");
-        })
+            const user = userCredential.user;
+            console.log(name.current.value);
+            updateProfile(user, {
+               
+              displayName: name.current.value, photoURL: "https://occ-0-6245-2164.1.nflxso.net/dnm/api/v6/vN7bi_My87NPKvsBoib006Llxzg/AAAABXvDtFo-HM-uWfPvUId_3crt7farmbN51NbaGZfil_-kRLGtiSnYeL_FNI7caMItKf77i55RP0m8Ofb1bQGDuv1qRkQC2Bg.png?r=9f"
+
+            }).then(() => {
+              // Profile updated!
+              //now get the name and user profile from the updated auth
+
+              const {uid,email,displayName,photoURL}=auth.currentUser;
+               dispatch(addUser({uid:uid,email:email,displayName:displayName,photoURL:photoURL}));
+               
+              //navigate the user to browse
+              navigate("/browse");
+            }).catch((error) => {
+              // An error occurred
+              navigate("/error");
+            })
+          // console.log(user);
+          })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;

@@ -28,16 +28,16 @@ const Body = () => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
               // User is signed in, see docs for a list of available properties
-              const {uid,email,displayName} = user;
+              const {uid,email,displayName,photoURL} = user;
               //dispatch an action using dispatch(add user to db)
-              dispatch(addUser({uid:uid,email:email,displayName:displayName}));
+              dispatch(addUser({uid:uid,email:email,displayName:displayName,photoURL:photoURL}));
             } else {
               // User is signed out
               //dispatch an action remove user
               dispatch(removeUser());
             }
           });
-    },[]);
+    },[auth]);
   return (
     <div>
         <RouterProvider router={appRouter}></RouterProvider>
