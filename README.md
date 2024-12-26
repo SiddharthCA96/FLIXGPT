@@ -27,6 +27,8 @@
 - Solve few bugs related to routing and protected routes(user should not access browse page without signin)
 - All the routing is done in header 
 - Unsubscribe from onAuthStateChanged callback
+- Get the api from tmdb 
+- Make an api call from browse to tmdp
 
 
 # Features
