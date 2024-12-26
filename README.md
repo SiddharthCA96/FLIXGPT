@@ -25,6 +25,8 @@
   - Sign Out button
   - User logo
 - Solve few bugs related to routing and protected routes(user should not access browse page without signin)
+- All the routing is done in header 
+- Unsubscribe from onAuthStateChanged callback
 
 
 # Features

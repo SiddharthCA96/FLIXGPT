@@ -3,9 +3,9 @@ import Header from "./Header";
 import validate from "../utils/validate";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import { DEF_AVTAAR, LOGIN_BACK } from "../utils/constants";
 
 
 
@@ -13,7 +13,6 @@ const Login = () => {
   //state var to change/switch btw the forms
   const [isSignInform, setIsSignInForm] = useState(true);
   const [errorMessage,setErrorMessage]= useState(null);
-  const navigate=useNavigate()
   const dispatch=useDispatch();
   const name=useRef(null);
   const email=useRef(null);
@@ -24,36 +23,28 @@ const Login = () => {
   const handleButton=()=>{
     //validate the data using the function create din valiadate.jsx
     //valiadate takes email and pass as props
-    // console.log(email.current.value);
-    // console.log(password.current.value);
-    
+
     const mssg=validate(email.current.value,password.current.value);
     setErrorMessage(mssg);
-    //console.log(mssg);
     if(mssg)return;
 
     if(!isSignInform){
-      //Sign up logic
         //Sign up user after creating the user with email
+
         createUserWithEmailAndPassword(auth, email.current.value,password.current.value)
         .then((userCredential) => {
           // Signed up 
             const user = userCredential.user;
-            console.log(name.current.value);
             updateProfile(user, {
-              displayName: name.current.value, photoURL: "https://occ-0-6245-2164.1.nflxso.net/dnm/api/v6/vN7bi_My87NPKvsBoib006Llxzg/AAAABXvDtFo-HM-uWfPvUId_3crt7farmbN51NbaGZfil_-kRLGtiSnYeL_FNI7caMItKf77i55RP0m8Ofb1bQGDuv1qRkQC2Bg.png?r=9f"
+              displayName: name.current.value, photoURL:DEF_AVTAAR
 
             }).then(() => {
               // Profile updated!
               //now get the name and user profile from the updated auth
               const {uid,email,displayName,photoURL}=auth.currentUser;
                dispatch(addUser({uid:uid,email:email,displayName:displayName,photoURL:photoURL}));
-
-              //navigate the user to browse
-              navigate("/browse");
             }).catch((error) => {
               // An error occurred
-              navigate("/error");
             })
           // console.log(user);
           })
@@ -69,8 +60,6 @@ const Login = () => {
       .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
-        console.log(user);
-        navigate("/browse");
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -91,7 +80,7 @@ const Login = () => {
       </div>
       <div>
         <img
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/150c4b42-11f6-4576-a00f-c631308b1e43/web/IN-en-20241216-TRIFECTA-perspective_915a9055-68ad-4e81-b19a-442f1cd134dc_large.jpg"
+          src={LOGIN_BACK}
           alt="Backimg"
           className="w-full h-screen object-cover"
         />
