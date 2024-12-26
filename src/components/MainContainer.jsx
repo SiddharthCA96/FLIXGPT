@@ -10,17 +10,17 @@ const MainContainer = () => {
     if(!movies)return;
     //console.log(movies.length);
     
-    const randomInt = Math.floor(Math.random() * 15);
+    const randomInt = Math.floor(Math.random() * movies.length);
     
     const  mainMovie=movies[randomInt]; 
-    //console.log(mainMovie);
+    console.log(mainMovie);
     
-    const {original_title,overview}=mainMovie;
-
+    const {original_title,overview,id}=mainMovie;
+    console.log('Rendering MainContainer');
   return (
     <div>
       <VideoTitle title={original_title} overview={overview} />
-      <VideoBackground />
+      <VideoBackground movie_id={id} />
     </div>
   )
 }

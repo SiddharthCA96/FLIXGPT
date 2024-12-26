@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { addNowPlayingMovies } from '../utils/moviesSlice';
 
-//this hooks is used to get the nowplayingmovies from tmdb 
+//this hook is used to get the nowplayingmovies from tmdb 
 
 const useNowPlayingMovies = () => {
 
