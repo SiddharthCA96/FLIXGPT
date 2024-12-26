@@ -29,6 +29,7 @@
 - Unsubscribe from onAuthStateChanged callback
 - Get the api from tmdb 
 - Make an api call from browse to tmdp
+- Put the movies data to redux store (create a movi sice for this)
 
 
 # Features
