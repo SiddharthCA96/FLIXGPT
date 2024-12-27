@@ -29,7 +29,13 @@
 - Unsubscribe from onAuthStateChanged callback
 - Get the api from tmdb 
 - Make an api call from browse to tmdp
-- Put the movies data to redux store (create a movi sice for this)
+- Put the movies data to redux store (create a movi slice for this)
+- Create the main and secondry container in browse
+- Main Container
+ - VideoTitle
+ - VideoBackground
+  - Fetch the trailer of the movie from the store
+
 
 
 # Features

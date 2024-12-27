@@ -6,13 +6,16 @@ import { useEffect } from "react";
 // Hook to fetch the movie trailer from the API and add to the store
 const useMovieTrailer = ( movie_id ) => {
   const dispatch = useDispatch();
+  console.log({movie_id});
+  console.log("movie_id:", movie_id, "Type:", typeof movie_id);
+  const actualMovieId = movie_id.movieId || movie_id.id || null;
 
   const getMovieTrailer = async () => {
     try {
       // Fetch the videos related to that movie
       const response = await fetch(
-        `https://api.themoviedb.org/3/movie/${movie_id}/videos?language=en-US`,
-        API_OPTIONS
+        `https://api.themoviedb.org/3/movie/${actualMovieId }/videos?language=en-US`,
+         API_OPTIONS
       );
       console.log("chala");  
       const json = await response.json();
