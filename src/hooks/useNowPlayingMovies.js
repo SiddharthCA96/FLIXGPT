@@ -6,7 +6,10 @@ import { addNowPlayingMovies } from "../utils/moviesSlice";
 //this hook is used to get the nowplayingmovies from tmdb
 
 const useNowPlayingMovies = () => {
+    console.log("rendering now playing");
+    
   const dispatch = useDispatch();
+
   //fcn to get recenltly/now playing movies
   const nowPlayingMovies = async () => {
     const data = await fetch(
@@ -14,7 +17,7 @@ const useNowPlayingMovies = () => {
       API_OPTIONS
     );
     const json = await data.json();
-    // console.log(json.results);
+     //console.log(json.results);
     dispatch(addNowPlayingMovies({ nowPlayingMovies: json.results }));
   };
 
