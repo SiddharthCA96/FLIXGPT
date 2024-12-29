@@ -11,7 +11,7 @@ const Header = () => {
   const navigate = useNavigate();
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
-
+  const showgpt=useSelector((store)=>store.gpt.gptsearch);
   // Handle the sign-out function
   const handleSignOut = () => {
     signOut(auth)
@@ -55,7 +55,7 @@ const Header = () => {
           <button 
             onClick={handleGPTSearch}
             className="p-2 text-white-300 mr-4 rounded-md bg-purple-500 hover:bg-purple-700">
-            GPT Search
+            {showgpt ? "Browse" : "GPT Search"}
           </button>
           <button
             onClick={handleSignOut}
