@@ -1,5 +1,6 @@
 import useNowPlayingMovies from '../hooks/useNowPlayingMovies'
 import usePopularMovies from '../hooks/usePopularMovies';
+import useTopRated from '../hooks/useTopRated';
 import Header from './Header'
 import MainContainer from './MainContainer';
 import SecondryContainer from './SecondryContainer';
@@ -11,6 +12,9 @@ const Browse = () => {
 
   //calling hook responsibl for fetching popular movies
   usePopularMovies();
+
+  //calling hook responsibl for fetching top rated movies movies
+  useTopRated();
   return (
     <div>
       <Header />

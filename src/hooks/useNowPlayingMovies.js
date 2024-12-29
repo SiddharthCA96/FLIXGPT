@@ -20,6 +20,7 @@ const useNowPlayingMovies = () => {
      console.log("rendering now playing");
      //console.log(json.results);
     dispatch(addNowPlayingMovies({ nowPlayingMovies: json.results }));
+    //dispatch(addNowPlayingMovies(data.results));
   };
 
   //calling the nowplayingmovies from useeffect as you know
