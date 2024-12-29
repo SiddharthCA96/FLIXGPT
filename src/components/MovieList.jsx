@@ -19,6 +19,9 @@ const MovieList = ({ title, movies }) => {
           {title === "Top Rated" && movies?.topRatedMovies?.map(movie => (
             <MovieCard key={movie.id} posterPath={movie.poster_path} />
           ))}
+          {title === "Coming Soon" && movies?.upComingMovies?.map(movie => (
+            <MovieCard key={movie.id} posterPath={movie.poster_path} />
+          ))}
         </div>
       </div>
     </div>

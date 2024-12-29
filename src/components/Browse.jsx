@@ -1,6 +1,7 @@
 import useNowPlayingMovies from '../hooks/useNowPlayingMovies'
 import usePopularMovies from '../hooks/usePopularMovies';
 import useTopRated from '../hooks/useTopRated';
+import useUpcomingMovies from '../hooks/useUpcomingMovies';
 import Header from './Header'
 import MainContainer from './MainContainer';
 import SecondryContainer from './SecondryContainer';
@@ -15,6 +16,9 @@ const Browse = () => {
 
   //calling hook responsibl for fetching top rated movies movies
   useTopRated();
+
+   //calling hook responsibl for fetching upcoming movies movies
+   useUpcomingMovies()
   return (
     <div>
       <Header />
