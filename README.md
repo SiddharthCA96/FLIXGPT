@@ -35,7 +35,11 @@
  - VideoTitle
  - VideoBackground
   - Fetch the trailer of the movie from the store
-
+- Created respective hooks to fetch different types of movies and show them in secondry container
+- Bulid the gpt seacrh button
+- Create the gpt search component
+- Create the gptslice and coonnect that to store
+- Crete the toogle gpt fcn inside header
 
 
 # Features

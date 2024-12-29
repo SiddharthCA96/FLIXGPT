@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { addUser, removeUser } from "../utils/userSlice";
 import { FLIX_LOGO } from "../utils/constants";
+import { toggleGptSearch } from "../utils/gptSlice";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -22,6 +23,13 @@ const Header = () => {
       });
   };
 
+  //handle the GPTSearch button
+  const handleGPTSearch=()=>{
+    //toggle to gpt search
+
+    //dispatch the action to togglegptsearch
+    dispatch(toggleGptSearch());
+  }
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -44,17 +52,21 @@ const Header = () => {
       {/* User Info */}
       {user && (
         <div className="flex items-center">
+          <button 
+            onClick={handleGPTSearch}
+            className="p-2 text-white-300 mr-4 rounded-md bg-purple-500 hover:bg-purple-700">
+            GPT Search
+          </button>
+          <button
+            onClick={handleSignOut}
+            className="p-2 bg-red-500 text-white rounded-md hover:bg-red-800 mr-4">
+            Sign Out
+          </button>
           <img
             className="w-10 h-10 rounded-full border-2 border-white mr-4"
             src={`${user?.photoURL}?t=${new Date().getTime()}`}
             alt="User Profile"
           />
-          <button
-            onClick={handleSignOut}
-            className="p-2 bg-red-600 text-white rounded-md hover:bg-red-800"
-          >
-            Sign Out
-          </button>
         </div>
       )}
     </div>

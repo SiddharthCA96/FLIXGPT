@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { act } from "react";
+
 
 const moviesSlice=createSlice({
     name:"movies",
